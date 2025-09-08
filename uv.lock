@@ -12,7 +12,7 @@ wheels = [
 ]
 
 [[package]]
-name = "changeme-pre-commit"
+name = "AutoClicker-pre-commit"
 version = "0.0.0"
 source = { virtual = "." }
 dependencies = [

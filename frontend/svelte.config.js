@@ -20,7 +20,7 @@ const config = {
       name: pkg.version,
     },
     alias: {
-      "@wails": "./bindings/changeme/backend",
+      "@wails": "./bindings/autoclicker/backend",
     },
   },
 };

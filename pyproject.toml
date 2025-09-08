@@ -1,5 +1,5 @@
 [project]
-name = "changeme-pre-commit"
+name = "AutoClicker-pre-commit"
 version = "0.0.0"
 description = "pre-commit"
 readme = "README.md"

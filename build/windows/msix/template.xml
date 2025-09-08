@@ -8,27 +8,27 @@
         AllowPromptForPassword="false">
     </Settings>
     <Installer
-        Path="myfirstapp.exe"
+        Path="AutoClicker.exe"
         Arguments=""
-        InstallLocation="C:\Program Files\My Company\My Product">
+        InstallLocation="C:\Program Files\yulesxoxo\AutoClicker">
     </Installer>
     <PackageInformation
-        PackageName="My Product"
-        PackageDisplayName="My Product"
-        PublisherName="CN=My Company"
-        PublisherDisplayName="My Company"
+        PackageName="AutoClicker"
+        PackageDisplayName="AutoClicker"
+        PublisherName="CN=yulesxoxo"
+        PublisherDisplayName="yulesxoxo"
         Version="0.1.0.0"
-        PackageDescription="My Product Description">
+        PackageDescription="It's an Auto Clicker">
         <Capabilities>
             <Capability Name="runFullTrust" />
 
         </Capabilities>
         <Applications>
             <Application
-                Id="com.wails.myfirstapp"
-                Description="My Product Description"
-                DisplayName="My Product"
-                ExecutableName="myfirstapp.exe"
+                Id="com.yulesxoxo.autoclicker"
+                Description="It's an Auto Clicker"
+                DisplayName="AutoClicker"
+                ExecutableName="AutoClicker.exe"
                 EntryPoint="Windows.FullTrustApplication">
 
             </Application>
@@ -41,13 +41,13 @@
         </Dependencies>
         <Properties>
             <Framework>false</Framework>
-            <DisplayName>My Product</DisplayName>
-            <PublisherDisplayName>My Company</PublisherDisplayName>
-            <Description>My Product Description</Description>
+            <DisplayName>AutoClicker</DisplayName>
+            <PublisherDisplayName>yulesxoxo</PublisherDisplayName>
+            <Description>It's an Auto Clicker</Description>
             <Logo>Assets\AppIcon.png</Logo>
         </Properties>
     </PackageInformation>
-    <SaveLocation PackagePath="myfirstapp.msix" />
+    <SaveLocation PackagePath="AutoClicker.msix" />
     <PackageIntegrity>
         <CertificatePath></CertificatePath>
     </PackageIntegrity>
