@@ -1,0 +1,60 @@
+exclude: (^|/)\.idea/|(^|/)wailsjs/|.*\.md5$
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.md$'
+      - id: end-of-file-fixer
+      - id: check-json
+      - id: check-yaml
+      - id: check-toml
+      - id: pretty-format-json
+        exclude: '^(frontend/package-lock\.json|frontend/package\.json|build/windows/info\.json|wails\.json)$'
+        args:
+          - "--autofix"
+          - "--no-ensure-ascii"
+
+  # Shell scripts
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+
+  # uv
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.7.20
+    hooks:
+      - id: uv-lock
+        files: python/pyproject.toml
+        args: [--project, python]
+      - id: uv-export
+        files: python/pyproject.toml
+        args: [--project, python]
+
+
+  # Backend
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v2.2.2
+    hooks:
+      - id: golangci-lint
+        files: \.go$
+
+  # Frontend
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        entry:  npm --prefix frontend run prettier-write
+        language: system
+        files: frontend/
+        pass_filenames: false
+
+  - repo: local
+    hooks:
+      - id: svelte-check
+        name: svelte-check
+        entry: npm --prefix frontend run check
+        language: system
+        files: frontend/
+        pass_filenames: false

@@ -1,0 +1,53 @@
+name: Setup Tools
+description: Installs Go, Wails and Node.js either all at once or a specific tool
+inputs:
+  tool:
+    description: 'The tool to set up Go, Wails and Node'
+    required: false
+    default: 'all'
+  wails-version:
+    description: 'Wails version to install'
+    default: 'v3.0.0-alpha.28'
+  node-version:
+    description: 'Node.js version to install'
+    default: 'latest'
+runs:
+  using: composite
+  steps:
+    - name: Install system dependencies for Wails on Ubuntu
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get -yq update
+        sudo apt-get -yq install libgtk-3-0 libwebkit2gtk-4.1-dev gcc-aarch64-linux-gnu
+      shell: bash
+
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: go.mod
+        cache: true
+
+    - name: Get Go build cache path
+      id: go-cache-paths
+      shell: bash
+      run: |
+        echo "go-cache=$(go env GOCACHE)" >> $GITHUB_OUTPUT
+
+    - name: Cache Go build and module caches
+      uses: actions/cache@v4
+      with:
+        path: |
+          ${{ steps.go-cache-paths.outputs.go-cache }}
+        key: ${{ runner.os }}-${{ runner.arch }}-go-build-cache-${{ hashFiles('go.mod', 'go.sum') }}
+        restore-keys: ${{ runner.os }}-${{ runner.arch }}-go-build-cache-
+
+    - name: Install Wails3
+      run: go install -v github.com/wailsapp/wails/v3/cmd/wails3@${{ inputs.wails-version }}
+      shell: bash
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json

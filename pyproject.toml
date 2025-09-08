@@ -1,0 +1,9 @@
+[project]
+name = "changeme-pre-commit"
+version = "0.0.0"
+description = "pre-commit"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pre-commit>=4.3.0",
+]

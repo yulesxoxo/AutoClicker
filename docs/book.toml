@@ -1,0 +1,15 @@
+[book]
+authors = ["yulesxoxo"]
+language = "en"
+multilingual = false
+src = "src"
+title = "changeme Documentation"
+
+[rust]
+edition = "2021"
+
+[output.html]
+git-repository-url = "https://github.com/yulesxoxo/WailsAppTemplate"
+edit-url-template = "https://github.com/yulesxoxo/WailsAppTemplate/edit/main/docs/{path}"
+
+[preprocessor.alerts]

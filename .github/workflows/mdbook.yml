@@ -1,0 +1,34 @@
+name: GitHub Pages
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '**/mdbook.yml'
+      - 'docs/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write  # To push to a GitHub Pages site
+      id-token: write # To update the deployment status
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - run: cargo install mdbook
+
+      - run: cargo install mdbook-alerts
+
+      - run: mdbook build
+        working-directory: docs
+
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'docs/book'
+      - uses: actions/deploy-pages@v4
+        id: deployment

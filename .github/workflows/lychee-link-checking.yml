@@ -1,0 +1,23 @@
+name: mdBook validate links
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  link_checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Lychee Link Checker
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: true
+          args: --verbose --no-progress '**/*.md' --exclude 'https://lanyard.cnrad.dev/api/*'
